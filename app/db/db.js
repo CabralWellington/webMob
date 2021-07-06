@@ -9,5 +9,4 @@ async function connect(){
     global.connection = connection;
     return connection;
 }
-connect();
 module.exports = {connect}

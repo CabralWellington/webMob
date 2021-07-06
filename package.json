@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/CabralWellington/webMob/issues"
   },
-  "homepage": "https://github.com/CabralWellington/webMob#readme"
+  "homepage": "https://github.com/CabralWellington/webMob#readme",
+  "dependencies": {
+    "moment": "^2.29.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5",
+    "puppeteer": "^10.1.0"
+  }
 }
