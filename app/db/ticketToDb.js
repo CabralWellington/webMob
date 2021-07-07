@@ -13,7 +13,7 @@ async function toDbTicket(bufferList){
 async function insertOrUpdateTicket(ticket){
     const conn = await db.connect();
     const [rows] = await conn.query('SELECT * FROM atendimentos where numero_atendimento = ' + ticket[8] );
-    console.log(rows.length>0)
+    //console.log(rows.length>0)
     if(rows.length>0){ 
         update(ticket);
     }else{
@@ -60,11 +60,11 @@ async function updateSerialObs(page){
     const conn = await db.connect();
     const [rows] = await conn.query('SELECT numero_atendimento,observacao,numero_serie,id_mob2b_cliente, id_mob2b FROM _mysql.atendimentos where numero_serie = "X_X" or observacao ="X_X" limit 30');
     if(rows.length>0){
-       // console.log(rows.length)
+       console.log("Update Obs")
         for(i=0;i<rows.length;i++){
-           console.log("Update obersavao "+rows[i])
+           //console.log("Update obersavao "+rows[i])
             try {
-                console.log(rows[i].id_mob2b_cliente)
+                //console.log(rows[i].id_mob2b_cliente)
                 await page.waitForTimeout(10000);
                 await page.goto('http://mob2b-backend.cloudapp.net/Tracker/TrackerTarget/Edit/'+rows[i].id_mob2b_cliente);
                 await update_serial(rows[i].numero_atendimento,page);
