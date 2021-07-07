@@ -17,22 +17,18 @@ async function run(page,option){
 
 async function ctrlReadPageActive(page){
     var localBufferList = [];
-    console.log(moment().format("HH:mm:ss") + " Lendo os resultado das paginas");
-    for(i=1;i<getSizePage(page)+1;i++){
-         console.log(moment().format("HH:mm:ss") + " Lendo os resultado das paginas da primeira pagina");
-         localBufferList.unshift(readPageActive(i,page));
+    for(i=1;i<await getSizePage(page)+1;i++){
+        await localBufferList.unshift(await readPageActive(i,page));
     }
     await toDb.toDbTicket(localBufferList)
     await toDb.updateSerialObs(page)
 }
 async function ctrlReadPageDeactive(page){
     var localBufferList = [];
-    console.log(moment().format("HH:mm:ss") + " Lendo os resultado das paginas");
-    for(i=1;i<getSizePage(page)+1;i++){
-         console.log(moment().format("HH:mm:ss") + " Lendo os resultado das paginas da primeira pagina");
-         localBufferList.unshift(readPageDeactivate(i,page));
+    for(i=1;i< await getSizePage(page)+1;i++){
+         await localBufferList.unshift( await readPageDeactivate(i,page));
     }
-    return localBufferList
+    await toDb.toDbTicket(localBufferList)
 }
 async function readPageDeactivate(idPage,page){
     var localBufferList = [];

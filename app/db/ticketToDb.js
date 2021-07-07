@@ -4,7 +4,9 @@ var moment = require('moment'); // require
 module.exports = {toDbTicket,updateSerialObs}
 
 async function toDbTicket(bufferList){
-    for(i=1;i=bufferList.length;i++){
+    console.log("toDB " + await bufferList.length)
+
+    for(i=1;i=await bufferList.length;i++){
        await insertOrUpdateTicket(bufferList.pop(i));
     }
 }
@@ -34,7 +36,7 @@ async function insert(buffer){
       '"'+buffer[3]+'",'+
       '"'+"X_X"+'",'+
       '"'+buffer[2]+'")' 
-      console.log(sql);
+      //console.log(sql);
       conn.query(sql);
 }  
 async function update(buffer){
@@ -51,14 +53,14 @@ async function update(buffer){
     }
     const sql = "UPDATE atendimentos SET atend_status=?, dt_fechamento=?,dt_inicio=?, nome_tec=? WHERE numero_atendimento=?";
     const values = [buffer[4],dt_fechamento,dt_inicio,buffer[6],buffer[8]];
-    console.log("update "+buffer[8])
+    //console.log("update "+buffer[8])
     return await conn.query(sql, values);
 }
 async function updateSerialObs(page){
     const conn = await db.connect();
     const [rows] = await conn.query('SELECT numero_atendimento,observacao,numero_serie,id_mob2b_cliente, id_mob2b FROM _mysql.atendimentos where numero_serie = "X_X" or observacao ="X_X" limit 30');
     if(rows.length>0){
-        console.log(rows.length)
+       // console.log(rows.length)
         for(i=0;i<rows.length;i++){
            console.log("Update obersavao "+rows[i])
             try {
@@ -92,7 +94,7 @@ async function update_serial(numero_atendimento,page){
         //console.log("Inicio do banco");
         const sql = 'update atendimentos set numero_serie = ?, cidade = ?, UF = ?, endereco =?, logitude=?,latitude=? where numero_atendimento = ?';
         const values = [numero_serie,cidade,UF,endereco,logitude,latitude,numero_atendimento];
-        console.log(sql+values)
+        //console.log(sql+values)
         return await conn.query(sql, values);
     } catch (error) {
     console.log(error);
@@ -105,6 +107,6 @@ async function update_observacao(id_mob2b,page){
     const conn = await db.connect();
     const sql = "UPDATE atendimentos SET observacao=?, atend_tipo=? WHERE id_mob2b=?";
     const values = [observacao,atend_tipo,id_mob2b];
-    console.log(sql+values[0],values[1],values[2])
+    //console.log(sql+values[0],values[1],values[2])
     return await conn.query(sql, values);
 }

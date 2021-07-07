@@ -2,7 +2,7 @@ const ctrlLogin = require('./ctrl_Login')
 const ctrlJob = require('./ctrl_Job')
 const ctrlNav = require('./ctrl_Nav')
 const ctrlFilter = require('./ctrl_Filter')
-const CtrlTicketOpen = require("./ctrl_Ticket")
+const CtrlTicketDeactive = require("./ctrl_Ticket")
 const moment = require('moment');
 
 async function run(browser){
@@ -11,14 +11,13 @@ async function run(browser){
 
 async function Ctrl(browser){
     const page = await browser.newPage();
+    await ctrlNav.goto(page,"loginPage")
     do{
         try {
-            if(ctrlJob.getJobStatus()){
-                await ctrlNav.goto(page,"loginPage")
+            if(await ctrlJob.getJobStatus()){
                 await ctrlLogin.login(page);
-                await ctrlNav.goto(page,"ticketPage")
                 await ctrlFilter.setFilter(page,"ticketDeactive")
-                await CtrlTicketOpen.run(page,"Active")
+                await CtrlTicketDeactive.run(page,"Deactive")
             }
         } catch (error) {
             console.log(error)

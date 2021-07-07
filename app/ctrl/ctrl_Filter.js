@@ -21,7 +21,7 @@ async function setFilter(page,option){
             await page.evaluate(val => document.querySelector("#table > thead > tr > th:nth-child(5)").click());
             await page.evaluate(val => document.querySelector("#table > thead > tr > th:nth-child(5)").click());
             await page.waitForTimeout(1500);
-            await page1.evaluate(val => document.querySelector("#Active").value = "False");
+            await page.evaluate(val => document.querySelector("#Active").value = "False");
             await page.evaluate(val => document.querySelector("#btnApply").click());
             await stopFilter(page);
         break

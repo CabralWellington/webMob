@@ -1,4 +1,5 @@
 const info = require("../info/passwords");
+const ctrlNav = require('./ctrl_Nav')
 
 async function login(page){
     if(checkLogin(page)){
@@ -6,7 +7,11 @@ async function login(page){
         await page.type('#Password', info.getMobPassword());
         await page.click('.buttonLogin');
         await page.waitForTimeout(20000);
+        await ctrlNav.goto(page,"ticketPage")
+    }else{
+        await ctrlNav.goto(page,"ticketPage")
     }
+    await page.waitForTimeout(20000);
 }
 
 // Login Check

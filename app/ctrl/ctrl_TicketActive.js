@@ -12,12 +12,11 @@ async function run(browser){
 
 async function Ctrl(browser){
     const page = await browser.newPage();
+    await ctrlNav.goto(page,"loginPage")
     do{
         try {
-            if(ctrlJob.getJobStatus()){
-                await ctrlNav.goto(page,"loginPage")
-                await ctrlLogin.login(page);
-                await ctrlNav.goto(page,"ticketPage")
+            if(await ctrlJob.getJobStatus()){
+                await ctrlLogin.login(page)
                 await ctrlFilter.setFilter(page,"ticketActive")
                 await CtrlTicketOpen.run(page,"Active")
             }
