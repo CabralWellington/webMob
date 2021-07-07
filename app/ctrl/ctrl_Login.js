@@ -2,7 +2,7 @@ const info = require("../info/passwords");
 const ctrlNav = require('./ctrl_Nav')
 
 async function login(page){
-    if(checkLogin(page)){
+    if(await checkLogin(page)){
         await page.type('#Email', info.getMobLogin());
         await page.type('#Password', info.getMobPassword());
         await page.click('.buttonLogin');
