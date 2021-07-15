@@ -5,7 +5,7 @@ const todb = require("./app/db/ticketToDb")
 run();
 
 async function run(){
-    const browser1 = await puppeteer.launch({headless: false});
+    const browser1 = await puppeteer.launch(/*{headless: false}*/);
     //const browser2 = await puppeteer.launch({headless: false});
     //const browser3 = await puppeteer.launch({headless: false});
     ctrl_TicketOpen.run(browser1);
