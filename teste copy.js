@@ -1,13 +1,15 @@
 const moment = require('moment');
-var start = moment( "2021-06-04 07:21" );
-var end = moment( "2021-06-07 10:30" );
+
+
+var start = moment("2021-04-08 10:34:00");
+var end = moment("2021-04-13 08:53:00");
 
 var bizHours = {
-    1: { start: "07:30", end: "17:30" },
-    2: { start: "07:30", end: "17:30" },
-    3: { start: "07:30", end: "17:30" },
-    4: { start: "07:30", end: "17:30" },
-    5: { start: "07:30", end: "16:30" },
+    1: { start: "09:00", end: "18:00" },
+    2: { start: "09:00", end: "18:00" },
+    3: { start: "09:00", end: "18:00" },
+    4: { start: "09:00", end: "18:00" },
+    5: { start: "09:00", end: "17:00" },
     6: { },
     7: { }
 };
@@ -19,14 +21,14 @@ console.log( minutes );
 
 // calculation function
 function minutesWorked(startJob, endJob, bizHrs) {
-  if (end.isBefore(start, 'second')) {
+  if (endJob.isBefore(start, 'second')) {
     return 0;
   }
 
-  var timeDiff = moment.duration(end.diff(start));
-  var startDay = start.format('YYYY-MM-DD');
-  var endDay = end.format('YYYY-MM-DD');
-  var current = start;
+  var timeDiff = moment.duration(endJob.diff(startJob));
+  var startDay = startJob.format('YYYY-MM-DD');
+  var endDay = endJob.format('YYYY-MM-DD');
+  var current = startJob;
   var currentDay = current.format('YYYY-MM-DD');
 
   var totalMin = 0;
@@ -40,7 +42,7 @@ function minutesWorked(startJob, endJob, bizHrs) {
 
     if ( bizStartTime && bizStartTime ) {
         if (currentDay == startDay) {
-            startTime = start.format("HH:mm");
+            startTime = startJob.format("HH:mm");
             startTime = startTime > bizStartTime ? startTime : bizStartTime;
             startTime = startTime < bizEndTime ? startTime : bizEndTime;
         } else {
@@ -48,7 +50,7 @@ function minutesWorked(startJob, endJob, bizHrs) {
         }
 
         if (currentDay == endDay) {
-            endTime = end.format("HH:mm");
+            endTime = endJob.format("HH:mm");
             endTime = endTime < bizEndTime ? endTime : bizEndTime;
             endTime = endTime > bizStartTime ? endTime : bizStartTime;
         } else {

@@ -1,7 +1,8 @@
 const db = require("./db");
 var moment = require('moment'); // require
+var ctrlsla = require('../ctrl/ctrl_sla')
 
-module.exports = {toDbTicket,updateSerialObs}
+module.exports = {toDbTicket,updateSerialObs,updateSla,getSla}
 
 async function toDbTicket(bufferList){
     console.log("toDB " + await bufferList.length)
@@ -110,3 +111,18 @@ async function update_observacao(id_mob2b,page){
     //console.log(sql+values[0],values[1],values[2])
     return await conn.query(sql, values);
 }
+
+
+async function getSla(id_mob2b){
+    const conn = await db.connect();
+    const [rows] = await conn.query('select numero_atendimento from atendimentos where atend_sla = "X_X"  and dt_fechamento != "2000-01-01 00:00:00"');
+    return [rows]
+}
+
+async function updateSla(minutes,numero_atendimento){
+    const conn = await db.connect();
+    const sql = "UPDATE atendimentos SET atend_sla=?  WHERE numero_atendimento=?";
+    const values = [minutes,numero_atendimento];
+    await conn.query(sql, values);
+}
+
