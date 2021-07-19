@@ -1,5 +1,6 @@
 const nodemailer = require("nodemailer");
 const db = require("../db/db");
+const passwords = require("../info/passwords")
 var moment = require('moment'); 
 
 async function senderMail(page,id_mob2b) {
@@ -34,21 +35,22 @@ async function send(qtdAnexo,bodyfull,k,page,remetente){
   console.log("Quantidade de ANEXOS " + qtdAnexo + " Remetente " + remetente)
   let transporter
   let info
+  let server = passwords.getEmailServer()
   try {
     switch (qtdAnexo) {
       case 2:
         console.log("SWITCH 2")
         transporter = nodemailer.createTransport({
-          host: "email-ssl.com.br",
-          port: 587,
+          host: passwords.getEmailServer(),
+          port: passwords.getEmailPort(),
           secure: false, // true for 465, false for other ports
           auth: {
-            user: "wellington.oliveira@amazoncopy.com.br", // generated ethereal user
-            pass: "We@201020460318", // generated ethereal password
+            user: passwords.getEmailLogin(), // generated ethereal user
+            pass: passwords.getEmailPassword(), // generated ethereal password
           },
         });
         info = await transporter.sendMail({
-            from: 'nao.responda@amazoncopy.com.br', // sender address
+            from: passwords.getEmailSender(), // sender address
             to: remetente, // list of receivers
             subject: "Atendimento Amazoncopy nº= " + k, // Subject line
             text: "", // plain text body
@@ -76,16 +78,16 @@ async function send(qtdAnexo,bodyfull,k,page,remetente){
       case 3:
         console.log("SWITCH 3")
         transporter = nodemailer.createTransport({
-          host: "email-ssl.com.br",
-          port: 587,
+          host: passwords.getEmailServer(),
+          port: passwords.getEmailPort(),
           secure: false, // true for 465, false for other ports
           auth: {
-            user: "wellington.oliveira@amazoncopy.com.br", // generated ethereal user
-            pass: "We@201020460318", // generated ethereal password
+            user: passwords.getEmailLogin(), // generated ethereal user
+            pass: passwords.getEmailPassword(), // generated ethereal password
           },
         });
         info = await transporter.sendMail({
-            from: 'nao.responda@amazoncopy.com.br', // sender address
+            from: passwords.getEmailSender(), // sender address
             to: remetente, // list of receivers
             subject: "Atendimento Amazoncopy nº= " + k, // Subject line
             text: "", // plain text body
@@ -117,16 +119,16 @@ async function send(qtdAnexo,bodyfull,k,page,remetente){
       case 4:
         console.log("SWITCH 4")
         transporter = nodemailer.createTransport({
-          host: "email-ssl.com.br",
-          port: 587,
+          host: passwords.getEmailServer(),
+          port: passwords.getEmailPort(),
           secure: false, // true for 465, false for other ports
           auth: {
-            user: "wellington.oliveira@amazoncopy.com.br", // generated ethereal user
-            pass: "We@201020460318", // generated ethereal password
+            user: passwords.getEmailLogin(), // generated ethereal user
+            pass: passwords.getEmailPassword(), // generated ethereal password
           },
         });
         info = await transporter.sendMail({
-            from: 'nao.responda@amazoncopy.com.br', // sender address
+            from: passwords.getEmailSender(), // sender address
             to: remetente, // list of receivers
             subject: "Atendimento Amazoncopy nº= " + k, // Subject line
             text: "", // plain text body
@@ -162,16 +164,16 @@ async function send(qtdAnexo,bodyfull,k,page,remetente){
       case 5:
       console.log("SWITCH 4")
       transporter = nodemailer.createTransport({
-        host: "email-ssl.com.br",
-        port: 587,
-        secure: false, // true for 465, false for other ports
-        auth: {
-          user: "wellington.oliveira@amazoncopy.com.br", // generated ethereal user
-          pass: "We@201020460318", // generated ethereal password
-        },
-      });
-      info = await transporter.sendMail({
-          from: 'nao.responda@amazoncopy.com.br', // sender address
+        host: passwords.getEmailServer(),
+          port: passwords.getEmailPort(),
+          secure: false, // true for 465, false for other ports
+          auth: {
+            user: passwords.getEmailLogin(), // generated ethereal user
+            pass: passwords.getEmailPassword(), // generated ethereal password
+          },
+        });
+        info = await transporter.sendMail({
+            from: passwords.getEmailSender(), // sender address
           to: remetente, // list of receivers
           subject: "Atendimento Amazoncopy nº= " + k, // Subject line
           text: "", // plain text body
@@ -210,16 +212,16 @@ async function send(qtdAnexo,bodyfull,k,page,remetente){
     case 6:
       console.log("SWITCH 4")
       transporter = nodemailer.createTransport({
-        host: "email-ssl.com.br",
-        port: 587,
+        host: passwords.getEmailServer(),
+        port: passwords.getEmailPort(),
         secure: false, // true for 465, false for other ports
         auth: {
-          user: "wellington.oliveira@amazoncopy.com.br", // generated ethereal user
-          pass: "We@201020460318", // generated ethereal password
+          user: passwords.getEmailLogin(), // generated ethereal user
+          pass: passwords.getEmailPassword(), // generated ethereal password
         },
       });
       info = await transporter.sendMail({
-          from: 'nao.responda@amazoncopy.com.br', // sender address
+          from: passwords.getEmailSender(), // sender address
           to: remetente, // list of receivers
           subject: "Atendimento Amazoncopy nº= " + k, // Subject line
           text: "", // plain text body
@@ -262,16 +264,16 @@ async function send(qtdAnexo,bodyfull,k,page,remetente){
     case 7:
       console.log("SWITCH 4")
       transporter = nodemailer.createTransport({
-        host: "email-ssl.com.br",
-        port: 587,
-        secure: false, // true for 465, false for other ports
-        auth: {
-          user: "wellington.oliveira@amazoncopy.com.br", // generated ethereal user
-          pass: "We@201020460318", // generated ethereal password
-        },
-      });
-      info = await transporter.sendMail({
-          from: 'nao.responda@amazoncopy.com.br', // sender address
+        host: passwords.getEmailServer(),
+          port: passwords.getEmailPort(),
+          secure: false, // true for 465, false for other ports
+          auth: {
+            user: passwords.getEmailLogin(), // generated ethereal user
+            pass: passwords.getEmailPassword(), // generated ethereal password
+          },
+        });
+        info = await transporter.sendMail({
+            from: passwords.getEmailSender(), // sender address
           to: remetente, // list of receivers
           subject: "Atendimento Amazoncopy nº= " + k, // Subject line
           text: "", // plain text body
@@ -319,16 +321,16 @@ async function send(qtdAnexo,bodyfull,k,page,remetente){
       default:
           console.log("SWITCH DEFAULT")
           transporter = nodemailer.createTransport({
-          host: "email-ssl.com.br",
-          port: 587,
-          secure: false, // true for 465, false for other ports
-          auth: {
-            user: "wellington.oliveira@amazoncopy.com.br", // generated ethereal user
-            pass: "We@201020460318", // generated ethereal password
-          },
-        });
-        info = await transporter.sendMail({
-            from: 'nao.responda@amazoncopy.com.br', // sender address
+            host: passwords.getEmailServer(),
+            port: passwords.getEmailPort(),
+            secure: false, // true for 465, false for other ports
+            auth: {
+              user: passwords.getEmailLogin(), // generated ethereal user
+              pass: passwords.getEmailPassword(), // generated ethereal password
+            },
+          });
+          info = await transporter.sendMail({
+            from: passwords.getEmailSender(), // sender address
             to: remetente, // list of receivers
             subject: "Atendimento Amazoncopy nº= " + k, // Subject line
             text: "", // plain text body

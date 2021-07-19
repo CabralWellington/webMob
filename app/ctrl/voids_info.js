@@ -57,7 +57,7 @@ async function toDB(valOption,valInput,id_mob2b){
         const conn = await db.connect();
         const sql = await getRowTableName(valOption)
         const values = [valInput,id_mob2b];
-        conn.query(sql,values);
+        await  conn.query(sql,values);
         //console.log("Salve essa query " + sql)
     } catch (error) {
         
