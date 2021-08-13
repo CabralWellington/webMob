@@ -38,6 +38,38 @@ async function send(qtdAnexo,bodyfull,k,page,remetente){
   let server = passwords.getEmailServer()
   try {
     switch (qtdAnexo) {
+      case 1:
+        console.log("SWITCH 1")
+        transporter = nodemailer.createTransport({
+          host: passwords.getEmailServer(),
+          port: passwords.getEmailPort(),
+          secure: false, // true for 465, false for other ports
+          auth: {
+            user: passwords.getEmailLogin(), // generated ethereal user
+            pass: passwords.getEmailPassword(), // generated ethereal password
+          },
+        });
+        info = await transporter.sendMail({
+            from: passwords.getEmailSender(), // sender address
+            to: remetente, // list of receivers
+            subject: "Atendimento Amazoncopy nº= " + k, // Subject line
+            text: "", // plain text body
+            html: bodyfull,
+            attachments: [
+              {
+                name : "Assinatura.png",
+                path : await page.evaluate(()=> document.querySelector("#table-action > tbody > tr > td:nth-child(6) > a").href.substring(39,142))
+                },
+                {
+                name : "Anexo1.png",
+                path : await page.evaluate(()=> document.getElementsByClassName("img-responsive")[0].src)
+                }
+            ]
+          }
+        );
+        console.log("Message sent: %s", info.messageId);
+        console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info))
+      break;
       case 2:
         console.log("SWITCH 2")
         transporter = nodemailer.createTransport({
@@ -162,7 +194,7 @@ async function send(qtdAnexo,bodyfull,k,page,remetente){
       break;
   
       case 5:
-      console.log("SWITCH 4")
+      console.log("SWITCH 5")
       transporter = nodemailer.createTransport({
         host: passwords.getEmailServer(),
           port: passwords.getEmailPort(),
@@ -210,7 +242,7 @@ async function send(qtdAnexo,bodyfull,k,page,remetente){
       console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info))
     break;
     case 6:
-      console.log("SWITCH 4")
+      console.log("SWITCH 6")
       transporter = nodemailer.createTransport({
         host: passwords.getEmailServer(),
         port: passwords.getEmailPort(),
@@ -262,7 +294,7 @@ async function send(qtdAnexo,bodyfull,k,page,remetente){
       console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info))
     break;
     case 7:
-      console.log("SWITCH 4")
+      console.log("SWITCH 7")
       transporter = nodemailer.createTransport({
         host: passwords.getEmailServer(),
           port: passwords.getEmailPort(),
@@ -339,10 +371,6 @@ async function send(qtdAnexo,bodyfull,k,page,remetente){
               {
                 name : "Assinatura.png",
                 path : await page.evaluate(()=> document.querySelector("#table-action > tbody > tr > td:nth-child(6) > a").href.substring(39,142))
-                },
-                {
-                name : "Anexo1.png",
-                path : await page.evaluate(()=> document.getElementsByClassName("img-responsive")[0].src)
                 }
             ]
           }

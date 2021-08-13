@@ -8,7 +8,7 @@ async function run(page){
 async function search_info(page){
     
     const conn = await db.connect();
-    const [rows] = await conn.query('select id_mob2b from atendimentos inner join setor on nome_tec = nome_tec_setor where atend_status ="Fechado" and _setor = "Ass" and send_email = "X_X" and observacao not like "leitura" and numero_serie !="" and dt_inicio != "2000-01-01 00:00:00" limit 30');
+    const [rows] = await conn.query('SELECT * from sendemail');
     //console.log(rows.length)
     i = 0;
     do{
@@ -66,6 +66,8 @@ async function toDB(valOption,valInput,id_mob2b){
 
 async function getRowTableName(val){
     switch (val){
+        case "E-mail":
+            return "update atendimentos set atend_email=? where id_mob2b = ?"
         case "E-mail do cliente":
             return "update atendimentos set atend_email=? where id_mob2b = ?"
         case "Nome / Razão social do cliente":
